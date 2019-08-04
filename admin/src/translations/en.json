@@ -1,0 +1,11 @@
+{
+  "notification.error": "Jejda, něco se nepovedlo :-(",
+  "notification.photogallery.create.success": "Fotogalerie byla úspěšně vytvořena.",
+  "notification.photogallery.delete.success": "Fotogalerie byla odstraněna.",
+  "notification.photo.success": "Fotografie byla úspěšně vložena.",
+  "notification.photos.success": "Fotografie byly úspěšně vloženy v počtu {number}.",
+  "notification.delete.success": "Fotografie byla odstraněna.",
+  "notification.album.create.success": "Album bylo úspěšně vytvořeno.",
+  "notification.album.update.success": "Album bylo úspěšně aktualizováno.",
+  "notification.album.delete.success": "Album bylo odstraněno."
+}
