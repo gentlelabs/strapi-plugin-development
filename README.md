@@ -8,30 +8,36 @@ We will need global npm strapi commands.
 npm install strapi@beta -g
 ```
 
-## Make your solution directory e.g. /path/to/my-strapi-solution
+## Make your code directory e.g. /path/to/code (`mkdir code && cd code`)
 We will have following structure in this directory (*do not make those folders yet*).
 
 ```bash
-./strapi   
-./my-development-project
-./strapi-plugin-my-demo
+./code
+  ./strapi   
+  ./my-development-project
+  ./strapi-plugin-my-demo
 ```
 
-## Git clone Strapi project (that will make our /strapi folder)
+## Fork and then Git clone Strapi project using  SSH (that will make our /strapi folder) 
 ```bash
-cd /path/to/my-strapi-solution
-git clone https://github.com/strapi/strapi.git
+cd /path/to/code
+git clone git@github.com:<MY_GIT_USERNAME>/strapi.git
 ```
 
 ## Setup Strapi app project
 
 ```bash
-cd /path/to/my-strapi-solution/strapi
+cd /path/to/code/strapi
+
+# Using Yarn (recommended)
+yarn setup
+
+# Using npm
 npm run setup
 ```
 
 ## Create new Strapi project
-You can use strapi command or brand new `npx create-straps-app`
+You can use strapi command or brand new `npx create-strapi-app`
 
 ```bash
 strapi new my-development-project —quickstart
@@ -49,7 +55,7 @@ Just terminate `CTRL + C` since we don't need it right now.
 ## Generate new strapi plugin
 
 ```bash
-cd /path/to/my-strapi-solution/my-development-project
+cd /path/to/code/my-development-project
 strapi generate:plugin my-demo
 ```
 
@@ -64,14 +70,18 @@ I also recommend to read strapi [blog article](https://blog.strapi.io/buffet-js-
 about React Component Library made for Strapi and implementing [Buffet.js](https://www.buffetjs.io/).
 It will help you to make your plugin's UI with nice Strapi look.
 
-> Clone this repo and copy /admin directory to the root of your newly generated plugin.
+> Bufffetjs will be available in your project with the beta-18 until then you have a components Library in the Strapi monorepository
+ it's located in `./strapi/packages/strapi-helper-plugin/lib`. Then entire UI is based on this package.
+
+
+> Clone this repo and copy the  /admin directory to the root of your newly generated plugin.
 
 ## Move our new plugin to the Strapi project
 
 Now we move our plugin out of the `my-development-project` so we develop it as a stand alone plugin. Actually we used Strapi project like incubator for the plugin.
 
 ```bash
-mv /path/to/my-strapi-solution/my-development-project/plugins/my-demo/ /path/to/my-strapi-solution/strapi-plugin-my-demo/
+mv /path/to/code/my-development-project/plugins/my-demo/ /path/to/code/strapi-plugin-my-demo/
 ```
 
 Please note, that we also renamed plugin directory so it conforms `strapi-plugin-` naming rule.
@@ -81,10 +91,10 @@ Please note, that we also renamed plugin directory so it conforms `strapi-plugin
 Make simlink from your plugin directory to the `./strapi/packages` so Strapi app have reference to our plugin.
 
 ```bash
-ln -s /path/to/my-strapi-solution/strapi_demo/ /path/to/my-strapi-solution/strapi/packages/strapi-plugin-my-demo
+ln -s /path/to/code/strapi_demo/ /path/to/code/strapi/packages/strapi-plugin-my-demo
 ```
 
-Edit following file: `packages/strapi-admin/admin/src/plugins.js`
+Edit following file: `./strapi/packages/strapi-admin/admin/src/plugins.js`
 And add new line to the end of the exported object
 
 ```js
@@ -94,7 +104,12 @@ And add new line to the end of the exported object
 ## Run Strapi project in development mode
 in development mode to get it on http://localhost:1337
 ```bash
-cd /path/to/my-strapi-solution/my-development-project
+cd /path/to/code/my-development-project
+
+# Using yarn
+yarn develop
+
+# Using npm
 npm run develop
 ```
 
@@ -104,7 +119,7 @@ Open new terminal window, because you need two processes running. One process on
 in development mode to get it on http://localhost:4000. You will see your plugin
 on this port with webpack server live reload.
 ```bash
-cd /path/to/my-strapi-solution/strapi/packages/strapi-admin
+cd /path/to/code/strapi/packages/strapi-admin
 npm run develop
 ```
 
@@ -131,4 +146,3 @@ to
 Save file and look to the plugin page. Is there fixed padding? Then you did good job :-)
 
 > TIP: You can comment other plugins in `plugins.js` file mentioned above for better development performance.
-
