@@ -2,14 +2,18 @@
 This document describes Strapi (beta) custom plugin development including frontend with webpack hot reload feature. This tutorial is limited to Mac/Linux environment.
 
 ## Install Strapi as global package
-We will need global npm strapi commands.
+You will need global Yarn/npm strapi commands.
 
 ```bash
+# Using Yarn (recommended)
+yarn global add strapi@beta -g
+
+# Using npm
 npm install strapi@beta -g
 ```
 
-## Make your code directory e.g. /path/to/code (`mkdir code && cd code`)
-We will have following structure in this directory (*do not make those folders yet*).
+## Make your code directory e.g. ./code (`mkdir code && cd code`)
+You will have following structure in this directory (*do not make those folders yet*).
 
 ```bash
 ./code
@@ -18,16 +22,16 @@ We will have following structure in this directory (*do not make those folders y
   ./strapi-plugin-my-demo
 ```
 
-## Fork and then Git clone Strapi project using  SSH (that will make our /strapi folder) 
+## Fork and then Git clone Strapi project using  SSH (that will make yours / strapi folder) 
 ```bash
-cd /path/to/code
+cd ./code
 git clone git@github.com:<MY_GIT_USERNAME>/strapi.git
 ```
 
 ## Setup Strapi app project
 
 ```bash
-cd /path/to/code/strapi
+cd ./code/strapi
 
 # Using Yarn (recommended)
 yarn setup
@@ -46,21 +50,25 @@ strapi new my-development-project —quickstart
 or (with the same result)
 
 ```bash
+# Using Yarn (recommended)
+yarn create strapi-app my-development-project
+
+# Using npm
 npx create-strapi-app my-development-project
 ```
 
 This command will block your terminal, because it will start nodejs webserver with strapi.
-Just terminate `CTRL + C` since we don't need it right now.
+Just terminate `CTRL + C` since you don't need it right now.
 
 ## Generate new strapi plugin
 
 ```bash
-cd /path/to/code/my-development-project
+cd ./code/my-development-project
 strapi generate:plugin my-demo
 ```
 
 Because Strapi will generate in current version (beta-13) our plugin without
-`/admin` files, we need to add them manually. There is some basic setup that must
+`/admin` files, you need to add them manually. There is some basic setup that must
 be done. You can find it in this repo. Nevertheless I strongly suggest to discover strapi
 `packages` directory for the other plugins and read how plugins with admin interface
 are implemented. You can inspire here to your own plugin implementation like using
@@ -78,20 +86,20 @@ It will help you to make your plugin's UI with nice Strapi look.
 
 ## Move our new plugin to the Strapi project
 
-Now we move our plugin out of the `my-development-project` so we develop it as a stand alone plugin. Actually we used Strapi project like incubator for the plugin.
+Now you move our plugin out of the `my-development-project` so you develop it as a stand alone plugin. Actually you used Strapi project like incubator for the plugin.
 
 ```bash
-mv /path/to/code/my-development-project/plugins/my-demo/ /path/to/code/strapi-plugin-my-demo/
+mv ./code/my-development-project/plugins/my-demo/ ./code/strapi-plugin-my-demo/
 ```
 
-Please note, that we also renamed plugin directory so it conforms `strapi-plugin-` naming rule.
+Please note, that you also renamed plugin directory so it conforms `strapi-plugin-` naming rule.
 
-## Let Strapi app know, that we develop the strapi-plugin-my-demo plugin
+## Let Strapi app know, that you develop the strapi-plugin-my-demo plugin
 
 Make simlink from your plugin directory to the `./strapi/packages` so Strapi app have reference to our plugin.
 
 ```bash
-ln -s /path/to/code/strapi_demo/ /path/to/code/strapi/packages/strapi-plugin-my-demo
+ln -s ./code/strapi_demo/ ./code/strapi/packages/strapi-plugin-my-demo
 ```
 
 Edit following file: `./strapi/packages/strapi-admin/admin/src/plugins.js`
@@ -104,9 +112,9 @@ And add new line to the end of the exported object
 ## Run Strapi project in development mode
 in development mode to get it on http://localhost:1337
 ```bash
-cd /path/to/code/my-development-project
+cd ./code/my-development-project
 
-# Using yarn
+# Using Yarn (recommended)
 yarn develop
 
 # Using npm
@@ -119,14 +127,14 @@ Open new terminal window, because you need two processes running. One process on
 in development mode to get it on http://localhost:4000. You will see your plugin
 on this port with webpack server live reload.
 ```bash
-cd /path/to/code/strapi/packages/strapi-admin
-npm run develop
+cd ./code/strapi/packages/strapi-admin
+yarn develop
 ```
 
 Now when you navigate your browser to the http://localhost:4000, you will see the
 Strapi admin and in plugins left menu will be available your new plugin.
 
-Let's make some change to the plugin so we verify that hot reload works.
+Let's make some change to the plugin so you verify that hot reload works.
 Open the `/admin/src/index.js` file and change
 
 ```html
